@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.redhat</groupId>
+	<artifactId>hotrod-secured-client</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+
+	<name>JDG :: Workshop :: Spring Boot :: Infinispan</name>
+	<description>Basic client using Infinispan Quering and Spring Boot</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+
+		<!-- maven plugin versions -->
+		<fabric8.maven.plugin.version>3.1.80.redhat-000023</fabric8.maven.plugin.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+
+		<!-- dependency versions -->
+		<spring-boot.version>1.4.1.RELEASE</spring-boot.version>
+		<version.org.apache.cxf.cxf-spring-boot-starter-jaxrs>3.1.5.redhat-630329</version.org.apache.cxf.cxf-spring-boot-starter-jaxrs>
+		<version.org.apache.cxf.cxf-spring-boot-starter-jaxrs>3.1.5.redhat-630329</version.org.apache.cxf.cxf-spring-boot-starter-jaxrs>
+		<version.org.apache.cxf.cxf-spring-boot-starter-jaxws>3.1.5.redhat-630329</version.org.apache.cxf.cxf-spring-boot-starter-jaxws>
+		<version.org.springframework.boot.spring-boot-starter-test>1.4.1.RELEASE</version.org.springframework.boot.spring-boot-starter-test>
+		<version.io.swagger.swagger-jaxrs>1.5.10</version.io.swagger.swagger-jaxrs>
+		<version.org.springframework.boot.spring-boot-starter-actuator>1.4.1.RELEASE</version.org.springframework.boot.spring-boot-starter-actuator>
+		<version.org.springframework.boot.spring-boot-starter-web>1.4.1.RELEASE</version.org.springframework.boot.spring-boot-starter-web>
+	</properties>
+
+
+	<dependencies>
+		<!-- Enabling health checks -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>${version.org.springframework.boot.spring-boot-starter-actuator}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${version.org.springframework.boot.spring-boot-starter-web}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-spring-boot-starter-remote</artifactId>
+			<version>2.0.0.Alpha1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-remote</artifactId>
+			<version>9.1.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-features-metrics</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<!-- CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
+			<version>${version.org.apache.cxf.cxf-spring-boot-starter-jaxrs}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
+			<version>${version.org.apache.cxf.cxf-spring-boot-starter-jaxrs}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+			<version>${version.org.apache.cxf.cxf-spring-boot-starter-jaxws}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-service-description</artifactId>
+			<version>3.1.5.redhat-630224</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jaxrs</artifactId>
+			<version>${version.io.swagger.swagger-jaxrs}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<version>${version.org.springframework.boot.spring-boot-starter-test}</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<excludes>
+						<exclude>**/*KT.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

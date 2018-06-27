@@ -1,0 +1,16 @@
+.settings/
+.project
+bin/
+target/
+/doc/README.md
+.classpath
+.checkstyle
+.pmd
+listener.log
+*.iml
+.idea
+activemq-data/
+doc/
+release.properties
+pom.xml.releaseBackup
+src/test/resources/README.md
