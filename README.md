@@ -60,7 +60,7 @@ Configure JDG
             <hotrod-connector socket-binding="hotrod" cache-container="secured">
                 <topology-state-transfer lazy-retrieval="false" lock-timeout="1000" replication-timeout="5000"/>
                 <authentication security-realm="ApplicationRealm">
-                    <sasl server-name="football" mechanisms="DIGEST-MD5" qop="auth">
+                    <sasl server-name="workshop" mechanisms="DIGEST-MD5" qop="auth">
                         <policy>
                             <no-anonymous value="true"/>
                         </policy>
